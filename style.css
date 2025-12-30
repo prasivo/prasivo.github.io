@@ -1,0 +1,79 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BASE ===== */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  background-color: #ffffff;
+  line-height: 1.6;
+}
+
+/* ===== HEADER ===== */
+header {
+  padding: 20px 40px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+header h2 {
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+/* ===== MAIN CONTENT ===== */
+main {
+  padding: 60px 40px;
+  max-width: 900px;
+}
+
+main h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+main p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  max-width: 600px;
+}
+
+/* ===== BUTTON ===== */
+button {
+  margin-top: 20px;
+  padding: 12px 26px;
+  font-size: 15px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #fff;
+  color: #111;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 20px 40px;
+  border-top: 1px solid #e5e5e5;
+  font-size: 14px;
+  margin-top: 80px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  header,
+  main,
+  footer {
+    padding: 20px;
+  }
+
+  main h1 {
+    font-size: 32px;
+  }
+  }
