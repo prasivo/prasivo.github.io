@@ -1,23 +1,23 @@
-// MENU BUTTON
-document.querySelector(".nav-btn").addEventListener("click", () => {
-  window.location.href = "notes.html";
-});
-
-// SEARCH FUNCTION
-const searchInput = document.querySelector(".search-section input");
-searchInput.addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    alert("Searching for: " + searchInput.value);
+const translations = {
+  hero_title: {
+    en: "Learn Smarter with Free Notes and AI Tools",
+    hi: "मुफ़्त नोट्स और AI टूल्स के साथ स्मार्ट तरीके से सीखें",
+    hinglish: "Free notes aur AI tools ke saath smart learning"
+  },
+  hero_desc: {
+    en: "Access free notes and use smart AI tools to understand concepts better and faster.",
+    hi: "मुफ़्त नोट्स और स्मार्ट AI टूल्स से कॉन्सेप्ट्स को बेहतर और तेज़ समझें।",
+    hinglish: "Free notes aur smart AI tools se concepts easily samjho"
   }
-});
+};
 
-// LANGUAGE SWITCH (BASIC)
 const langSelect = document.querySelector(".lang-select");
-langSelect.addEventListener("change", function () {
-  alert("Language switched to: " + this.value);
-});
 
-// START LEARNING BUTTON
-document.querySelector(".primary-btn").addEventListener("click", () => {
-  window.location.href = "notes.html";
+langSelect.addEventListener("change", () => {
+  const lang = langSelect.value.toLowerCase();
+
+  document.querySelectorAll("[data-key]").forEach(el => {
+    const key = el.getAttribute("data-key");
+    el.innerText = translations[key][lang];
+  });
 });
