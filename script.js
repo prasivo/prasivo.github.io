@@ -90,7 +90,7 @@ function toggleMenu() {
     ? "hidden"
     : "auto";
 }
-// Auto close menu on link click
+// Auto close menu on side click
 document.querySelectorAll("#sideMenu a").forEach(link => {
   link.addEventListener("click", () => {
     const menu = document.getElementById("sideMenu");
@@ -102,7 +102,7 @@ document.addEventListener("click", (e) => {
   const menu = document.getElementById("sideMenu");
   const icon = document.querySelector(".menu-icon");
   if (!menu || !icon) return;
-
+  
   if (menu.classList.contains("active") &&
       !menu.contains(e.target) &&
       !icon.contains(e.target)) {
