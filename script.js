@@ -50,3 +50,23 @@ if (langSelect) {
 function toggleMenu() {
   document.getElementById("sideMenu").classList.toggle("active");
   }
+#searchResults {
+  list-style: none;
+  margin-top: 10px;
+  padding: 0;
+  max-width: 500px;
+}
+
+#searchResults li {
+  padding: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+#searchResults li a {
+  text-decoration: none;
+  color: #111;
+}
+
+#searchResults li:hover {
+  background: #f5f5f5;
+}
