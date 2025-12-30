@@ -281,3 +281,66 @@ footer {
   font-weight: bold;
   letter-spacing: 3px;
   }
+/* ===== TOP BAR ===== */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e5e5e5;
+  position: relative;
+}
+
+/* HAMBURGER */
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* LOGO CENTER */
+.logo-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+/* LANGUAGE */
+.lang-box {
+  margin-top: 10px;
+}
+
+.lang-select {
+  padding: 6px;
+}
+
+/* ===== SIDE MENU ===== */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -220px;
+  width: 200px;
+  height: 100%;
+  background: #fff;
+  border-right: 1px solid #e5e5e5;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+}
+
+.side-menu a {
+  display: block;
+  padding: 14px 20px;
+  color: #111;
+  text-decoration: none;
+}
+
+.side-menu a:hover {
+  background: #f5f5f5;
+}
+
+/* ACTIVE MENU */
+.side-menu.active {
+  left: 0;
+}
