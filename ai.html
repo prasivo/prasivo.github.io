@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Tools | Prasivo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <a href="index.html">Home</a>
+  </div>
+  <div class="header-center">
+    <div class="logo">PRASIVO</div>
+  </div>
+</header>
+
+<main>
+  <h1>AI Question & Answer</h1>
+
+  <input id="question" type="text" placeholder="Ask a question..." style="width:100%;padding:10px;">
+  <button onclick="askAI()" class="primary-btn">Ask AI</button>
+
+  <p id="answer" style="margin-top:20px;"></p>
+</main>
+
+<footer>
+  © 2025 Prasivo · Independent Learning Platform
+</footer>
+
+<script>
+function askAI() {
+  const q = document.getElementById("question").value.toLowerCase();
+  let ans = "This feature is under development.";
+
+  if (q.includes("anatomy")) {
+    ans = "Human anatomy studies the structure of the human body.";
+  } else if (q.includes("pharmaceutics")) {
+    ans = "Pharmaceutics deals with formulation and preparation of drugs.";
+  }
+
+  document.getElementById("answer").innerText = ans;
+}
+</script>
+
+</body>
+</html>
