@@ -83,7 +83,30 @@ if (homeSearch && searchResults) {
 // ===== HAMBURGER MENU TOGGLE =====
 function toggleMenu() {
   const menu = document.getElementById("sideMenu");
-  if (menu) {
-    menu.classList.toggle("active");
-  }
+  if (!menu) return;
+
+  menu.classList.toggle("active");
+  document.body.style.overflow = menu.classList.contains("active")
+    ? "hidden"
+    : "auto";
 }
+// Auto close menu on link click
+document.querySelectorAll("#sideMenu a").forEach(link => {
+  link.addEventListener("click", () => {
+    const menu = document.getElementById("sideMenu");
+    if (menu) menu.classList.remove("active");
+  });
+});
+// Close menu on outside click
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("sideMenu");
+  const icon = document.querySelector(".menu-icon");
+  if (!menu || !icon) return;
+
+  if (menu.classList.contains("active") &&
+      !menu.contains(e.target) &&
+      !icon.contains(e.target)) {
+    menu.classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+});
