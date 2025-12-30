@@ -80,3 +80,10 @@ if (homeSearch && searchResults) {
     });
   });
   }
+// ===== HAMBURGER MENU TOGGLE =====
+function toggleMenu() {
+  const menu = document.getElementById("sideMenu");
+  if (menu) {
+    menu.classList.toggle("active");
+  }
+}
