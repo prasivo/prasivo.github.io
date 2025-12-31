@@ -1,1 +1,266 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<title>Prasivo – Ultimate HAP Notes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
+<style>
+:root {
+  --primary: #4f46e5;
+  --secondary: #ec4899;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text: #f1f5f9;
+  --accent: #22d3ee;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+/* HEADER */
+header {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(15px);
+  padding: 15px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.logo { font-size: 24px; font-weight: 800; color: var(--accent); letter-spacing: 2px; }
+
+/* CONTAINER */
+.container { max-width: 1000px; margin: auto; padding: 40px 20px; }
+
+/* HOME HERO */
+.hero { text-align: center; margin-bottom: 50px; animation: fadeIn 1s ease; }
+.hero h1 { font-size: 2.5rem; margin-bottom: 10px; background: linear-gradient(to right, #22d3ee, #4f46e5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* UNIT GRID */
+.unit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.unit-card {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.unit-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px rgba(34, 211, 238, 0.2);
+}
+
+.unit-card i { font-size: 40px; color: var(--accent); margin-bottom: 15px; }
+
+/* CONTENT SECTION (HIDDEN BY DEFAULT) */
+.content-section { display: none; animation: slideUp 0.5s ease-out; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.back-btn {
+  background: var(--primary);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* STUDY MATERIAL STYLING */
+.section-box {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border-left: 5px solid var(--accent);
+}
+
+.mind-map {
+  background: #000;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--accent);
+  border: 1px dashed var(--accent);
+  margin: 20px 0;
+}
+
+.ques-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+.m2 { background: #10b981; }
+.m5 { background: #f59e0b; }
+.m10 { background: #ef4444; }
+
+.mistake-box {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+h2, h3 { color: var(--accent); }
+p { line-height: 1.8; color: #cbd5e1; }
+ul li { margin-bottom: 10px; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">PRASIVO</div>
+  <i class="fas fa-bars" style="font-size: 20px;"></i>
+</header>
+
+<div class="container">
+  
+  <div id="home-view">
+    <div class="hero">
+      <h1>Human Anatomy & Physiology - I</h1>
+      <p>B.Pharm 1st Sem | PCI Syllabus simplified in Hinglish</p>
+    </div>
+
+    <div class="unit-grid">
+      <div class="unit-card" onclick="showUnit('unit1')">
+        <i class="fas fa-atom"></i>
+        <h3>Unit I</h3>
+        <p>Introduction & Homeostasis</p>
+        <small>Learn the basics of life.</small>
+      </div>
+
+      <div class="unit-card" onclick="showUnit('unit2')">
+        <i class="fas fa-microscope"></i>
+        <h3>Unit II</h3>
+        <p>Tissues & Skin</p>
+        <small>Cells, Epithelial & Connective tissues.</small>
+      </div>
+      
+      </div>
+  </div>
+
+  <div id="unit1" class="content-section">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back to Home</button>
+    
+    <div class="hero">
+      <h1>Unit I: Introduction to Human Body</h1>
+    </div>
+
+    <div class="section-box">
+      <h3>❓ What & Why? (Introduction)</h3>
+      <p><b>Human Anatomy</b> ka matlab hai body ke structure ki study karna (Kaunsa part kahan hai). <br>
+         <b>Physiology</b> ka matlab hai ye parts kaam kaise karte hain (How they function).<br>
+         <b>Why study?</b> Jab tak hume normal body ke baare me nahi pata hoga, tab tak hum bimaari (Pathology) aur dawai (Pharmacology) nahi samajh payenge.</p>
+    </div>
+
+    <div class="section-box">
+      <h3>🧠 Mind Map: Levels of Organization</h3>
+      <div class="mind-map">
+        Chemical (Atoms) → Cellular (Cells) → Tissue → Organ → System → Organism
+      </div>
+      
+    </div>
+
+    <div class="section-box">
+      <h3>🏠 Homeostasis: The Balance</h3>
+      <p><b>What:</b> Body ka internal temperature aur environment fix rakhne ki process.</p>
+      <p><b>Example:</b> Garmi lagne par pasina (Sweat) aana, taaki body cool ho sake. Ye ek <i>Negative Feedback Mechanism</i> hai.</p>
+      
+    </div>
+
+    <div class="section-box" style="border-left-color: var(--secondary);">
+      <h3>⭐ Important Questions</h3>
+      <ul>
+        <li><span class="ques-badge m2">2 Marks</span> Define Homeostasis.</li>
+        <li><span class="ques-badge m5">5 Marks</span> Explain Negative Feedback Mechanism with example.</li>
+        <li><span class="ques-badge m10">10 Marks</span> Describe Levels of Structural Organization in detail.</li>
+      </ul>
+    </div>
+
+    <div class="mistake-box">
+      <h3>⚠️ Common Mistakes (Kya galti nahi karni hai)</h3>
+      <ul>
+        <li>Anatomy aur Physiology ki definition ko mix mat karna.</li>
+        <li>Feedback mechanism me "Stimulus, Receptor, Control Center, Effector" ye keywords likhna zaroori hai.</li>
+        <li>Diagrams hamesha pencil se banayein aur labelling clear rakhein.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="unit2" class="content-section">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back to Home</button>
+    
+    <div class="hero">
+        <h1>Unit II: Tissues (The Fabric of Body)</h1>
+    </div>
+
+    <div class="section-box">
+        <h3>❓ What are Tissues?</h3>
+        <p>Group of cells jo milkar ek specific kaam karte hain. Body me 4 main types ke tissues hote hain.</p>
+        <div class="mind-map">
+            Epithelial (Covering) | Connective (Support) | Muscular (Movement) | Nervous (Control)
+        </div>
+        
+    </div>
+
+    <div class="section-box">
+        <h3>⭐ Important Questions</h3>
+        <ul>
+          <li><span class="ques-badge m5">5 Marks</span> Classify Epithelial tissue with diagrams.</li>
+          <li><span class="ques-badge m10">10 Marks</span> Explain the types and functions of Connective Tissue.</li>
+        </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showUnit(unitId) {
+  document.getElementById('home-view').style.display = 'none';
+  document.querySelectorAll('.content-section').forEach(section => {
+    section.style.display = 'none';
+  });
+  document.getElementById(unitId).style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+function goBack() {
+  document.querySelectorAll('.content-section').forEach(section => {
+    section.style.display = 'none';
+  });
+  document.getElementById('home-view').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
