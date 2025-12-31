@@ -1,1 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRASIVO | The Future of Pharmacy Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
 
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- MODERN NAVBAR --- */
+        nav {
+            position: fixed; top: 0; width: 100%; height: 70px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem; font-weight: 800; letter-spacing: 2px;
+            background: linear-gradient(to right, #22d3ee, #818cf8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .nav-controls { display: flex; gap: 15px; align-items: center; }
+
+        select {
+            background: var(--glass); color: white; border: 1px solid var(--glass-border);
+            padding: 5px 10px; border-radius: 8px; outline: none; cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 150px 5% 50px; text-align: center;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; }
+        .hero p { color: #94a3b8; font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; }
+
+        /* --- SMART SEARCH --- */
+        .search-container {
+            max-width: 600px; margin: 0 auto 50px; position: relative;
+        }
+
+        .search-container input {
+            width: 100%; padding: 18px 25px; border-radius: 50px;
+            background: var(--glass); border: 1px solid var(--glass-border);
+            color: white; font-size: 1rem; outline: none;
+            transition: 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .search-container input:focus {
+            border-color: var(--primary); box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+
+        /* --- FEATURE GRID --- */
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px; padding: 0 5% 100px;
+        }
+
+        .card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            padding: 30px; border-radius: 24px; cursor: pointer;
+            transition: 0.4s; position: relative; overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px); background: rgba(255,255,255,0.06);
+            border-color: var(--primary);
+        }
+
+        .card i { font-size: 2.5rem; margin-bottom: 20px; color: var(--accent); }
+        .card h3 { margin-bottom: 10px; font-size: 1.4rem; }
+
+        /* --- SIDEBAR MENU --- */
+        #sidebar {
+            position: fixed; top: 0; left: -300px; width: 280px; height: 100%;
+            background: #0f172a; border-right: 1px solid var(--glass-border);
+            z-index: 2000; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+            padding: 80px 20px;
+        }
+
+        #sidebar.active { left: 0; }
+
+        .menu-item {
+            display: block; padding: 15px; color: #94a3b8; text-decoration: none;
+            font-size: 1.1rem; border-radius: 12px; margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .menu-item:hover { background: var(--primary); color: white; transform: translateX(10px); }
+
+        /* --- FLOATING CHAT BOT --- */
+        .bot-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px; background: var(--primary);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            z-index: 1000; animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
+
+        /* --- OVERLAY --- */
+        #overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+            display: none; z-index: 1500; backdrop-filter: blur(4px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <i class="fas fa-align-left" id="menuBtn" style="cursor:pointer; font-size: 1.2rem;"></i>
+            <div class="logo">PRASIVO</div>
+        </div>
+        <div class="nav-controls">
+            <select id="langSwitch" onchange="changeLang()">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="hn">Hinglish</option>
+            </select>
+        </div>
+    </nav>
+
+    <div id="sidebar">
+        <a href="#" class="menu-item"><i class="fas fa-book-open"></i> &nbsp; Notes</a>
+        <a href="#" class="menu-item"><i class="fas fa-list-check"></i> &nbsp; Syllabus</a>
+        <a href="#" class="menu-item"><i class="fas fa-star"></i> &nbsp; Imp Questions</a>
+        <a href="#" class="menu-item"><i class="fas fa-robot"></i> &nbsp; AI Mode</a>
+        <hr style="margin: 20px 0; opacity: 0.1;">
+        <a href="#" class="menu-item"><i class="fas fa-info-circle"></i> &nbsp; About Us</a>
+    </div>
+    <div id="overlay"></div>
+
+    <section class="hero">
+        <h1 id="heroTitle">Smartest Learning Platform for Future Pharmacists</h1>
+        <p id="heroDesc">Crack Semester Exams, GPAT, and CUET-PG with high-quality notes and AI-powered study assistance.</p>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for HAP, Analysis, Pharmaceutics...">
+            <i class="fas fa-search" style="position: absolute; right: 25px; top: 20px; color: #6366f1;"></i>
+        </div>
+    </section>
+
+    <div class="grid">
+        <div class="card" onclick="alert('Opening Notes...')">
+            <i class="fas fa-file-lines" style="color: #60a5fa;"></i>
+            <h3 class="cTitle">Smart Notes</h3>
+            <p class="cDesc">Unit-wise handwritten and digital notes for all semesters.</p>
+        </div>
+        <div class="card" onclick="alert('Opening AI Mode...')">
+            <i class="fas fa-brain" style="color: #a855f7;"></i>
+            <h3 class="cTitle">AI Study Mode</h3>
+            <p class="cDesc">Let our AI solve your complex pharmacy equations & doubts.</p>
+        </div>
+        <div class="card" onclick="alert('Opening Questions...')">
+            <i class="fas fa-clipboard-question" style="color: #f43f5e;"></i>
+            <h3 class="cTitle">Important Questions</h3>
+            <p class="cDesc">Exam-oriented 2, 5, and 10 marks question bank.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; padding: 40px; background: var(--glass); margin: 0 5% 100px; border-radius: 20px;">
+        <h3 id="founderTitle">Founder & CEO: Prasoon Gupta</h3>
+        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 20px;">
+            <a href="#" style="color: #818cf8;"><i class="fab fa-linkedin fa-2x"></i></a>
+            <a href="#" style="color: #ec4899;"><i class="fab fa-instagram fa-2x"></i></a>
+        </div>
+    </div>
+
+    <div class="bot-btn" onclick="alert('AI Assistant starting...')">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <script>
+        // --- CONTENT DATA FOR LANGUAGES ---
+        const content = {
+            en: {
+                heroT: "Smartest Learning Platform for Future Pharmacists",
+                heroD: "Crack Semester Exams, GPAT, and CUET-PG with high-quality notes.",
+                c1T: "Smart Notes", c1D: "Unit-wise handwritten and digital notes.",
+                c2T: "AI Mode", c2D: "Solve complex doubts instantly.",
+                founder: "Founder & CEO: Prasoon Gupta"
+            },
+            hi: {
+                heroT: "भविष्य के फार्मासिस्टों के लिए सबसे स्मार्ट मंच",
+                heroD: "उच्च गुणवत्ता वाले नोट्स के साथ सेमेस्टर परीक्षा और GPAT पास करें।",
+                c1T: "स्मार्ट नोट्स", c1D: "सभी सेमेस्टर के लिए यूनिट-वार डिजिटल नोट्स।",
+                c2T: "AI मोड", c2D: "जटिल संदेहों को तुरंत हल करें।",
+                founder: "संस्थापक और सीईओ: प्रसून गुप्ता"
+            },
+            hn: {
+                heroT: "Future Pharmacists ke liye Sabse Smart Platform",
+                heroD: "Quality notes ke sath Semester Exams aur GPAT crack karein.",
+                c1T: "Smart Notes", c1D: "Unit-wise handwritten aur digital notes.",
+                c2T: "AI Mode", c2D: "Apne complex doubts turant solve karein.",
+                founder: "Founder & CEO: Prasoon Gupta"
+            }
+        };
+
+        // --- LANGUAGE SWITCHER ---
+        function changeLang() {
+            const l = document.getElementById('langSwitch').value;
+            document.getElementById('heroTitle').innerText = content[l].heroT;
+            document.getElementById('heroDesc').innerText = content[l].heroD;
+            document.getElementById('founderTitle').innerText = content[l].founder;
+            // Update cards
+            const titles = document.querySelectorAll('.cTitle');
+            const descs = document.querySelectorAll('.cDesc');
+            titles[0].innerText = content[l].c1T; descs[0].innerText = content[l].c1D;
+            titles[1].innerText = content[l].c2T; descs[1].innerText = content[l].c2D;
+        }
+
+        // --- SIDEBAR LOGIC ---
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        menuBtn.onclick = () => { sidebar.classList.add('active'); overlay.style.display = 'block'; }
+        overlay.onclick = () => { sidebar.classList.remove('active'); overlay.style.display = 'none'; }
+
+        // --- SEARCH ANIMATION ---
+        document.getElementById('searchInput').onfocus = function() {
+            this.placeholder = "Type subject name...";
+        };
+
+        // --- SCROLL REVEAL ---
+        ScrollReveal().reveal('.card', { delay: 200, distance: '50px', interval: 100, origin: 'bottom' });
+        ScrollReveal().reveal('.hero', { delay: 100, distance: '30px', origin: 'top' });
+
+    </script>
+</body>
+      </html>
+      
