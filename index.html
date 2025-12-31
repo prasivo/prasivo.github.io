@@ -1,1 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRASIVO | Pharmacy Evolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
 
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #22d3ee;
+            --bg: #0b0f1a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text: #f1f5f9;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; height: 80px;
+            background: rgba(11, 15, 26, 0.8); backdrop-filter: blur(20px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .menu-btn { font-size: 1.5rem; cursor: pointer; color: var(--text); z-index: 2100; transition: 0.3s; }
+        .menu-btn:hover { color: var(--accent); }
+
+        .logo { 
+            position: absolute; left: 50%; transform: translateX(-50%);
+            font-size: 1.8rem; font-weight: 800; letter-spacing: 3px;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .lang-select {
+            background: var(--glass); color: white; border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 12px; border-radius: 10px; cursor: pointer; outline: none;
+        }
+
+        /* --- SIDEBAR --- */
+        #sidebar {
+            position: fixed; top: 0; left: -320px; width: 300px; height: 100%;
+            background: #0f172a; z-index: 3000; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+            padding: 100px 30px; box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+        }
+        #sidebar.active { left: 0; }
+        .sidebar-link {
+            display: block; padding: 15px 20px; color: #94a3b8; text-decoration: none;
+            font-size: 1.1rem; border-radius: 12px; margin-bottom: 10px; transition: 0.3s;
+        }
+        .sidebar-link:hover { background: var(--primary); color: white; transform: translateX(10px); }
+        .sidebar-link i { margin-right: 15px; width: 20px; text-align: center; }
+
+        #overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            display: none; z-index: 2500;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero { 
+            padding: 180px 5% 80px; text-align: center;
+            background: radial-gradient(circle at center, #1e1b4b, transparent);
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1; }
+        .hero p { color: #94a3b8; font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px; }
+
+        /* --- PAGES --- */
+        .page { display: none; padding: 100px 5% 50px; animation: fadeInUp 0.6s ease; }
+        .page.active { display: block; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- CARDS & GRID --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+        .card {
+            background: var(--card-bg); padding: 40px; border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.4s;
+            text-align: center;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .card i { font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
+
+        /* --- ABOUT SECTION (README DATA) --- */
+        .about-content { max-width: 850px; margin: 0 auto; background: var(--card-bg); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); }
+        .about-content h2 { color: var(--accent); margin: 30px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .about-content ul { margin-left: 20px; color: #94a3b8; }
+        .about-content li { margin-bottom: 10px; }
+
+        /* --- FOOTER --- */
+        footer { padding: 60px 5%; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .logo { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
+        <div class="logo" onclick="showPage('home-page')">PRASIVO</div>
+        <select class="lang-select" id="langSwitch" onchange="changeLang()">
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="hn">Hinglish</option>
+        </select>
+    </nav>
+
+    <div id="overlay" onclick="toggleSidebar()"></div>
+
+    <div id="sidebar">
+        <a href="#" class="sidebar-link" onclick="showPage('home-page')"><i class="fas fa-home"></i> Home</a>
+        <a href="#" class="sidebar-link" onclick="alert('System coming soon!')"><i class="fas fa-file-alt"></i> Notes</a>
+        <a href="#" class="sidebar-link" onclick="alert('System coming soon!')"><i class="fas fa-book"></i> Syllabus</a>
+        <a href="#" class="sidebar-link" onclick="showPage('about-page')"><i class="fas fa-info-circle"></i> About</a>
+    </div>
+
+    <div id="home-page" class="page active">
+        <section class="hero">
+            <h1 id="heroTitle">The Future of Pharmacy Learning</h1>
+            <p id="heroDesc">An all-in-one smart learning platform for pharmacy students. Prepare for Semester exams, GPAT, CUET-PG and more with clarity and structure.</p>
+        </section>
+
+        <div class="grid">
+            <div class="card" onclick="alert('Subject system is under development!')">
+                <i class="fas fa-capsules"></i>
+                <h3 id="card1T">B.Pharmacy</h3>
+                <p id="card1D">Semester wise notes and exam preparation material.</p>
+            </div>
+            <div class="card" onclick="alert('GPAT system is under development!')">
+                <i class="fas fa-graduation-cap"></i>
+                <h3 id="card2T">GPAT / CUET-PG</h3>
+                <p id="card2D">Crack competitive exams with targeted study paths.</p>
+            </div>
+            <div class="card" onclick="showPage('about-page')">
+                <i class="fas fa-rocket"></i>
+                <h3 id="card3T">Our Mission</h3>
+                <p id="card3D">One structured platform to rule all your pharmacy confusion.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="about-page" class="page">
+        <div class="about-content">
+            <h1 style="color:#fff">About Prasivo</h1>
+            <p>Prasivo is an all-in-one smart learning platform designed for pharmacy students. It focuses on clear concepts, exam-oriented study material, and a clean learning experience.</p>
+
+            <h2>Why Prasivo?</h2>
+            <p>Most students struggle by switching between multiple books, PDFs, apps, and websites. Prasivo aims to solve this by bringing everything into one structured and reliable platform:</p>
+            <ul>
+                <li>Official syllabus reference</li>
+                <li>Subject-wise study flow</li>
+                <li>Important and repeated exam questions</li>
+                <li>Smart learning with AI assistance (planned)</li>
+            </ul>
+
+            <h2>Target Audience</h2>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+                <span style="background:var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 14px;">B.Pharm</span>
+                <span style="background:var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 14px;">D.Pharm</span>
+                <span style="background:var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 14px;">GPAT</span>
+                <span style="background:var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 14px;">CUET-PG</span>
+            </div>
+
+            <h2>Founding Story</h2>
+            <p><b>Founder & CEO: Prasoon Gupta</b><br>
+            Prasivo was created with a simple goal: <i>Study from one place without confusion.</i></p>
+            
+            <div style="margin-top: 20px; display: flex; gap: 20px;">
+                <a href="#" style="color:var(--accent); text-decoration:none;"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="#" style="color:var(--accent); text-decoration:none;"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><b>PRASIVO</b> &copy; 2025 | Created by Prasoon Gupta</p>
+        <p style="font-size: 12px; color: #64748b; margin-top: 10px;">Licensed under MIT</p>
+    </footer>
+
+    <script>
+        // --- NAVIGATION ENGINE ---
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('active');
+            overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            if(document.getElementById('sidebar').classList.contains('active')) toggleSidebar();
+            window.scrollTo(0,0);
+        }
+
+        // --- LANGUAGE ENGINE ---
+        const langData = {
+            en: {
+                title: "The Future of Pharmacy Learning",
+                desc: "An all-in-one smart learning platform for pharmacy students. Prepare for exams with clarity.",
+                c1T: "B.Pharmacy", c1D: "Semester wise notes and exam preparation.",
+                c2T: "GPAT / CUET-PG", c2D: "Crack exams with targeted study paths.",
+                c3T: "Our Mission", c3D: "One platform for all your pharmacy needs."
+            },
+            hi: {
+                title: "फार्मेसी सीखने का भविष्य",
+                desc: "फार्मेसी छात्रों के लिए एक स्मार्ट लर्निंग प्लेटफॉर्म। स्पष्टता के साथ परीक्षा की तैयारी करें।",
+                c1T: "बी.फार्मेसी", c1D: "सेमेस्टर के अनुसार नोट्स और परीक्षा सामग्री।",
+                c2T: "GPAT / CUET-PG", c2D: "लक्ष्य-आधारित अध्ययन के साथ परीक्षा क्रैक करें।",
+                c3T: "हमारा लक्ष्य", c3D: "आपकी सभी फार्मेसी जरूरतों के लिए एक मंच।"
+            },
+            hn: {
+                title: "Pharmacy Learning ka Future",
+                desc: "Pharmacy students ke liye all-in-one platform. Exams ki taiyari karein clarity ke sath.",
+                c1T: "B.Pharmacy", c1D: "Semester wise notes aur exam material.",
+                c2T: "GPAT / CUET-PG", c2D: "Targeted study paths ke sath exam crack karein.",
+                c3T: "Our Mission", c3D: "Pharmacy ki saari confusion door karne ke liye ek platform."
+            }
+        };
+
+        function changeLang() {
+            const lang = document.getElementById('langSwitch').value;
+            const d = langData[lang];
+            document.getElementById('heroTitle').innerText = d.title;
+            document.getElementById('heroDesc').innerText = d.desc;
+            document.getElementById('card1T').innerText = d.c1T;
+            document.getElementById('card1D').innerText = d.c1D;
+            document.getElementById('card2T').innerText = d.c2T;
+            document.getElementById('card2D').innerText = d.c2D;
+            document.getElementById('card3T').innerText = d.c3T;
+            document.getElementById('card3D').innerText = d.c3D;
+        }
+
+        // --- SCROLL REVEAL ---
+        ScrollReveal().reveal('.card', { delay: 200, distance: '50px', origin: 'bottom', interval: 100 });
+        ScrollReveal().reveal('.hero h1', { delay: 100, distance: '30px', origin: 'top' });
+    </script>
+</body>
+  </html>
+  
