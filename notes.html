@@ -1,48 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>B.Pharm Notes | Prasivo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS FILE -->
   <link rel="stylesheet" href="style.css">
-</head>
+
+  <!-- PAGE SPECIFIC CSS (OPTIONAL) -->
   <style>
-    <!-- HEADER -->
-<header class="top-bar">
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
-
-  <div class="logo">PRASIVO</div>
-
-  <select class="language">
-    <option>English</option>
-    <option>Hindi</option>
-    <option>Hinglish</option>
-  </select>
-</header>
-
-<!-- SIDE MENU -->
-<nav id="sideMenu" class="side-menu">
-  <a href="index.html">Home</a>
-  <a href="notes.html">Notes</a>
-  <a href="syllabus.html">Syllabus</a>
-  <a href="imp-questions.html">Important Questions</a>
-  <a href="#">AI Mode</a>
-  <a href="about.html">About</a>
-</nav>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       background: #f6f7fb;
       color: #222;
-    }
-
-    header {
-      background: #ffffff;
-      padding: 16px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-      border-bottom: 1px solid #ddd;
     }
 
     main {
@@ -57,7 +30,7 @@
     }
 
     h2 {
-      margin-top: 40px;
+      margin-top: 30px;
       margin-bottom: 10px;
       font-size: 20px;
     }
@@ -119,68 +92,74 @@
 
 <body>
 
-<header>
-  PRASIVO – Notes
-</header>
+  <!-- HEADER -->
+  <header class="top-bar">
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="logo">PRASIVO</div>
 
-<main>
+    <select class="language">
+      <option>English</option>
+      <option>Hindi</option>
+      <option>Hinglish</option>
+    </select>
+  </header>
 
-  <!-- SECTION 1 -->
-  <div class="card">
-    <h1>B.Pharm – 1st Semester</h1>
-    <p>
-      Official syllabus-based notes and subjects structured
-      for semester exams, GPAT, and CUET-PG preparation.
-    </p>
-  </div>
+  <!-- SIDE MENU -->
+  <nav id="sideMenu" class="side-menu">
+    <a href="index.html">Home</a>
+    <a href="notes.html">Notes</a>
+    <a href="syllabus.html">Syllabus</a>
+    <a href="imp-questions.html">Important Questions</a>
+    <a href="#">AI Mode</a>
+    <a href="about.html">About</a>
+  </nav>
 
-  <!-- SECTION 2 -->
-  <div class="card">
-    <h2>PCI Syllabus</h2>
-    <p>
-      Refer to the official PCI syllabus before starting preparation.
-    </p>
-    <a href="syllabus.html">View PCI Syllabus</a>
+  <!-- MAIN CONTENT -->
+  <main>
 
-  </div>
+    <!-- SECTION 1 -->
+    <div class="card">
+      <h1>B.Pharm – 1st Semester</h1>
+      <p>
+        Official syllabus-based notes and subjects structured
+        for semester exams, GPAT, and CUET-PG preparation.
+      </p>
+    </div>
 
-  <!-- SECTION 3 -->
-  <div class="card">
-    <h2>Subjects (For Study)</h2>
+    <!-- SECTION 2 -->
+    <div class="card">
+      <h2>PCI Syllabus</h2>
+      <p>Refer to the official PCI syllabus before starting preparation.</p>
 
-    <ul class="subjects">
-      <li>
-        <a href="anatomy.html">Human Anatomy and Physiology</a>
-      </li>
-      <li>
-        <a href="pharmaceutics.html">Pharmaceutics</a>
-      </li>
-      <li>
-        <a href="pharma-inorganic.html">Pharmaceutical Inorganic Chemistry</a>
-      </li>
-      <li>
-        <a href="pharma-analysis.html">Pharmaceutical Analysis</a>
-      </li>
-      <li>
-        <a href="remedial-maths.html">Remedial Mathematics</a>
-      </li>
-      <li>
-        <a href="skill-development.html">Skill Development</a>
-      </li>
-    </ul>
-  </div>
+      <a href="syllabus.html" class="btn">View PCI Syllabus</a>
+    </div>
 
-</main>
+    <!-- SECTION 3 -->
+    <div class="card">
+      <h2>Subjects (For Study)</h2>
 
-<footer>
-  © 2025 Prasivo · Independent Learning Platform
-</footer>
+      <ul class="subjects">
+        <li><a href="anatomy.html">Human Anatomy and Physiology</a></li>
+        <li><a href="pharmaceutics.html">Pharmaceutics</a></li>
+        <li><a href="pharma-inorganic.html">Pharmaceutical Inorganic Chemistry</a></li>
+        <li><a href="pharma-analysis.html">Pharmaceutical Analysis</a></li>
+        <li><a href="remedial-maths.html">Remedial Mathematics</a></li>
+        <li><a href="skill-development.html">Skill Development</a></li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2025 Prasivo · Independent Learning Platform
+  </footer>
+
+  <!-- MENU SCRIPT -->
+  <script>
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("open");
+    }
+  </script>
 
 </body>
-  </html>
-
-<script>
-function toggleMenu() {
-  document.getElementById("sideMenu").classList.toggle("open");
-}
-</script>
+</html>
