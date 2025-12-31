@@ -1,1 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PRASIVO | Pharmacy Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root { --primary: #6366f1; --accent: #22d3ee; --bg: #0b0f1a; --card-bg: rgba(30, 41, 59, 0.7); --text: #f1f5f9; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+        
+        /* 1. TOP NAVIGATION */
+        nav { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(11, 20, 38, 0.95); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 2px; color: #fff; cursor: pointer; position: absolute; left: 50%; transform: translateX(-50%); text-transform: uppercase; }
+        .menu-btn { font-size: 1.5rem; cursor: pointer; color: var(--accent); width: 40px; }
+        .lang-div { width: 50px; text-align: right; }
+        
+        /* 2. SIDEBAR & OVERLAY */
+        #sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: #0f172a; z-index: 3000; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding-top: 80px; box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
+        #sidebar.active { left: 0; }
+        .sidebar-link { display: flex; align-items: center; padding: 18px 25px; color: #94a3b8; text-decoration: none; font-size: 1.1rem; transition: 0.2s; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .sidebar-link i { margin-right: 15px; width: 20px; color: var(--accent); }
+        .sidebar-link:active { background: var(--primary); color: white; }
+        
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; z-index: 2500; backdrop-filter: blur(4px); }
+        
+        /* 3. PAGES SYSTEM */
+        .page { display: none; padding: 90px 20px 50px; min-height: 100vh; animation: fadeIn 0.3s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* 4. HOME COMPONENTS */
+        .search-box { background: var(--card-bg); border-radius: 50px; padding: 15px 20px; display: flex; align-items: center; margin: 20px 0 30px; border: 1px solid rgba(255,255,255,0.1); }
+        .search-box input { background: none; border: none; color: white; width: 100%; outline: none; margin-left: 10px; font-size: 1rem; }
+
+        .founder-card { background: linear-gradient(145deg, #1e293b, #0f172a); padding: 30px 20px; border-radius: 25px; text-align: center; border: 1px solid var(--primary); margin-top: 40px; }
+        .founder-card h3 { font-size: 0.9rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; }
+        .founder-name { font-size: 1.5rem; font-weight: 800; margin: 10px 0; }
+        .social-links a { color: white; font-size: 1.5rem; margin: 0 15px; text-decoration: none; }
+
+        /* 5. AI INTERFACE */
+        .ai-container { background: #161b22; border-radius: 20px; border: 1px solid var(--primary); display: flex; flex-direction: column; height: 65vh; position: relative; }
+        #aiChat { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; }
+        .ai-input-group { display: flex; padding: 12px; background: #0d1117; border-top: 1px solid rgba(99, 102, 241, 0.3); border-radius: 0 0 20px 20px; }
+        .ai-input-group input { flex: 1; background: #1a202c; border: none; padding: 12px; color: white; border-radius: 10px; outline: none; }
+        .ai-input-group button { background: var(--primary); border: none; color: white; padding: 0 18px; border-radius: 10px; margin-left: 10px; font-weight: 800; }
+
+        /* 6. FLOATING BUTTON */
+        .ai-btn-float { position: fixed; bottom: 25px; right: 25px; width: 65px; height: 65px; background: var(--primary); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5); z-index: 500; }
+        .ai-btn-float span { font-size: 0.7rem; font-weight: 800; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="menu-btn" onclick="window.toggleSidebar()"><i class="fas fa-bars"></i></div>
+        <div class="logo" onclick="window.showPage('home-page')">PRASIVO</div>
+        <div class="lang-div">
+            <select id="langSwitch" onchange="window.changeLang()" style="background:none; color:var(--accent); border:1px solid var(--accent); border-radius:5px; font-weight:bold; font-size:0.7rem;">
+                <option value="en">EN</option>
+                <option value="hi">HI</option>
+                <option value="hn">HN</option>
+            </select>
+        </div>
+    </nav>
+
+    <div id="overlay" onclick="window.closeSidebar()"></div>
+
+    <div id="sidebar">
+        <a href="javascript:void(0)" class="sidebar-link" onclick="window.showPage('home-page')"><i class="fas fa-home"></i> Home</a>
+        <a href="javascript:void(0)" class="sidebar-link" onclick="window.showPage('notes-page')"><i class="fas fa-file-medical"></i> Notes</a>
+        <a href="javascript:void(0)" class="sidebar-link" onclick="window.showPage('syllabus-page')"><i class="fas fa-scroll"></i> Syllabus</a>
+        <a href="javascript:void(0)" class="sidebar-link" onclick="window.showPage('imp-page')"><i class="fas fa-star"></i> Important Qs</a>
+        <a href="javascript:void(0)" class="sidebar-link" onclick="window.showPage('ai-page')"><i class="fas fa-robot"></i> AI Mode</a>
+        <a href="javascript:void(0)" class="sidebar-link" onclick="window.showPage('about-page')"><i class="fas fa-info-circle"></i> About</a>
+    </div>
+
+    <div id="home-page" class="page active">
+        <div class="search-box">
+            <i class="fas fa-search" style="color:var(--accent)"></i>
+            <input type="text" placeholder="Search subjects, units, questions...">
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <h1 style="font-size: 2.2rem; font-weight: 800; line-height: 1.2;">Pharmacy <span style="color:var(--accent)">Simplified.</span></h1>
+            <p style="color: #94a3b8; margin-top: 15px;">Study smarter, not harder. Sab kuch ek hi jagah par.</p>
+        </div>
+
+        <div class="founder-card">
+            <h3>Founder & CEO</h3>
+            <div class="founder-name">Prasoon Gupta</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.8rem; color: #94a3b8;">Learning Platform for Future Pharmacists</p>
+        </div>
+    </div>
+
+    <div id="ai-page" class="page">
+        <h2 style="margin-bottom: 20px; text-align: center;">PRASIVO AI <span style="font-size: 0.8rem; color: var(--accent);">(BETA)</span></h2>
+        <div class="ai-container">
+            <div id="aiChat">
+                <div style="color:var(--accent); background:rgba(34, 211, 238, 0.1); padding:10px; border-radius:10px; margin-bottom:15px;">
+                    <b>AI:</b> Namaste! Main Prasivo AI hoon. Aap mujhse kisi bhi topic par sawal puch sakte hain.
+                </div>
+            </div>
+            <div class="ai-input-group">
+                <input type="text" id="aiInput" placeholder="Ask anything (e.g. Cell, Anatomy)...">
+                <button onclick="window.askAI()">Ask</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notes-page" class="page">
+        <h2 style="border-bottom: 2px solid var(--primary); padding-bottom:10px;">B.Pharmacy Notes</h2>
+        <p style="margin-top:20px; color:#94a3b8;">Semester-wise PCI notes loading...</p>
+    </div>
+
+    <div id="syllabus-page" class="page">
+        <h2>Syllabus</h2>
+        <p style="margin-top:20px;">Download PCI official syllabus PDF here.</p>
+    </div>
+
+    <div id="about-page" class="page">
+        <h2>About Prasivo</h2>
+        <p style="margin-top:20px; line-height:1.8;">Prasivo is an all-in-one smart learning platform designed for pharmacy students to provide clean, reliable, and exam-oriented study material.</p>
+    </div>
+
+    <div id="imp-page" class="page">
+        <h2>Important Questions</h2>
+        <p style="margin-top:20px;">Previous year and repeated exam questions.</p>
+    </div>
+
+    <div class="ai-btn-float" onclick="window.showPage('ai-page')">
+        <i class="fas fa-robot" style="font-size: 1.5rem;"></i>
+        <span>ASK</span>
+    </div>
+
+    <footer style="text-align:center; padding: 40px 20px; opacity:0.5; font-size:0.8rem;">
+        PRASIVO &copy; 2026 | Built for Future Pharmacists
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
