@@ -1,0 +1,89 @@
+{
+  "program": "B.Pharmacy",
+  "semester": "Semester I",
+  "syllabus_source": "PCI",
+
+  "syllabus": [
+    "Human Anatomy and Physiology – I",
+    "Pharmaceutics – I",
+    "Pharmaceutical Analysis – I",
+    "Pharmaceutical Inorganic Chemistry – I",
+    "Communication Skills",
+    "Remedial Biology / Mathematics"
+  ],
+
+  "subjects": [
+    {
+      "code": "BP101T",
+      "name": "Human Anatomy and Physiology – I",
+      "exams": ["Semester", "GPAT", "CUET-PG"],
+      "units": [
+        "Introduction to Human Body",
+        "Structural Organization & Tissues",
+        "Skeletal System",
+        "Blood and Lymph",
+        "Cardiovascular System"
+      ]
+    },
+    {
+      "code": "BP102T",
+      "name": "Pharmaceutics – I",
+      "exams": ["Semester", "GPAT"],
+      "units": [
+        "Introduction to Pharmaceutics",
+        "Dosage Forms",
+        "Routes of Drug Administration",
+        "Pharmaceutical Calculations",
+        "Packaging of Pharmaceutical Products"
+      ]
+    },
+    {
+      "code": "BP103T",
+      "name": "Pharmaceutical Analysis – I",
+      "exams": ["Semester", "GPAT"],
+      "units": [
+        "Errors and Classification",
+        "Volumetric Analysis",
+        "Acid–Base Titrations",
+        "Redox Titrations",
+        "Precipitation Titrations"
+      ]
+    },
+    {
+      "code": "BP104T",
+      "name": "Pharmaceutical Inorganic Chemistry – I",
+      "exams": ["Semester", "GPAT"],
+      "units": [
+        "Impurities in Pharmaceutical Substances",
+        "Limit Tests",
+        "Electrolytes",
+        "Dental Products",
+        "Gastrointestinal Agents"
+      ]
+    },
+    {
+      "code": "BP105T",
+      "name": "Communication Skills",
+      "exams": ["Semester"],
+      "units": [
+        "Communication Process",
+        "Listening Skills",
+        "Oral Communication",
+        "Written Communication",
+        "Professional Communication"
+      ]
+    },
+    {
+      "code": "BP106T",
+      "name": "Remedial Biology / Mathematics",
+      "exams": ["Semester"],
+      "units": [
+        "Cell Biology / Algebra Basics",
+        "Plant & Animal Kingdom / Calculus Basics",
+        "Genetics / Probability",
+        "Human Physiology / Statistics",
+        "Environmental Biology / Trigonometry"
+      ]
+    }
+  ]
+}
