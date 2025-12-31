@@ -81,28 +81,36 @@ if (homeSearch && searchResults) {
   });
   }
 // ===== HAMBURGER MENU TOGGLE =====
-function toggleMenu() {
-  const menu = document.getElementById("sideMenu");
-  if (!menu) return;
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("menuBtn");
+  const sideMenu = document.getElementById("sideMenu");
 
-  menu.classList.toggle("active");
-  document.body.style.overflow =
-    menu.classList.contains("active") ? "hidden" : "auto";
-}
+  if (!menuBtn || !sideMenu) return;
 
-document.addEventListener("click", (e) => {
-  const menu = document.getElementById("sideMenu");
-  const icon = document.querySelector(".menu-icon");
-  if (!menu || !icon) return;
+  // Open / close menu on button tap
+  menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sideMenu.classList.toggle("active");
+    document.body.style.overflow =
+      sideMenu.classList.contains("active") ? "hidden" : "auto";
+  });
 
-  if (
-    menu.classList.contains("active") &&
-    !menu.contains(e.target) &&
-    !icon.contains(e.target)
-  ) {
-    menu.classList.remove("active");
-    document.body.style.overflow = "auto";
-  }
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (
+      sideMenu.classList.contains("active") &&
+      !sideMenu.contains(e.target) &&
+      !menuBtn.contains(e.target)
+    ) {
+      sideMenu.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+  });
+
+  // Prevent menu click from bubbling
+  sideMenu.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
 });
 // Auto close menu on side click
 document.querySelectorAll("#sideMenu a").forEach(link => {
