@@ -2,43 +2,155 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>B.Pharm Semester I | Prasivo</title>
+  <title>B.Pharm Notes | Prasivo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f6f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 16px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #4f46e5;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #4338ca;
+    }
+
+    ul.subjects {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul.subjects li {
+      border-bottom: 1px solid #eee;
+    }
+
+    ul.subjects li a {
+      display: block;
+      padding: 14px 10px;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+
+    ul.subjects li a:hover {
+      background: #f1f2ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #555;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="topbar">
-  <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-  <div class="logo-center">PRASIVO</div>
+<header>
+  PRASIVO – Notes
 </header>
 
-<nav id="sideMenu" class="side-menu">
-  <a href="index.html">Home</a>
-  <a href="notes.html">Notes</a>
-  <a href="ai.html">AI Tools</a>
-</nav>
+<main>
 
-<main class="container">
+  <!-- SECTION 1 -->
+  <div class="card">
+    <h1>B.Pharm – 1st Semester</h1>
+    <p>
+      Official syllabus-based notes and subjects structured
+      for semester exams, GPAT, and CUET-PG preparation.
+    </p>
+  </div>
 
-  <h1 id="programTitle"></h1>
-  <h2 id="semesterTitle"></h2>
+  <!-- SECTION 2 -->
+  <div class="card">
+    <h2>PCI Syllabus</h2>
+    <p>
+      Refer to the official PCI syllabus before starting preparation.
+    </p>
+    <a href="syllabus.html" class="btn">View PCI Syllabus</a>
+  </div>
 
-  <section>
-    <h3>📘 PCI Official Syllabus</h3>
-    <ul id="syllabusList"></ul>
-  </section>
+  <!-- SECTION 3 -->
+  <div class="card">
+    <h2>Subjects (For Study)</h2>
 
-  <section>
-    <h3>📚 Subjects</h3>
-    <div id="subjectsContainer"></div>
-  </section>
+    <ul class="subjects">
+      <li>
+        <a href="anatomy.html">Human Anatomy and Physiology</a>
+      </li>
+      <li>
+        <a href="pharmaceutics.html">Pharmaceutics</a>
+      </li>
+      <li>
+        <a href="pharma-inorganic.html">Pharmaceutical Inorganic Chemistry</a>
+      </li>
+      <li>
+        <a href="pharma-analysis.html">Pharmaceutical Analysis</a>
+      </li>
+      <li>
+        <a href="remedial-maths.html">Remedial Mathematics</a>
+      </li>
+      <li>
+        <a href="skill-development.html">Skill Development</a>
+      </li>
+    </ul>
+  </div>
 
 </main>
 
+<footer>
+  © 2025 Prasivo · Independent Learning Platform
+</footer>
 
-<script src="app.js"></script>
-<script src="script.js"></script>
 </body>
-</html>
+  </html>
