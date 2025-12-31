@@ -2,68 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Human Anatomy and Physiology | Prasivo</title>
+  <title>Human Anatomy & Physiology – I | Prasivo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="header">
-  <div class="header-left">
-    <a href="notes.html" class="nav-link">Back to Notes</a>
-  </div>
-
-  <div class="header-center">
-    <div class="logo">PRASIVO</div>
-  </div>
-
-  <div class="header-right"></div>
+<!-- COMMON HEADER -->
+<header class="topbar">
+  <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+  <div class="logo-center">PRASIVO</div>
 </header>
 
-<main>
-  <h1>Human Anatomy and Physiology</h1>
+<!-- SIDE MENU -->
+<nav id="sideMenu" class="side-menu">
+  <a href="index.html">Home</a>
+  <a href="notes.html">Notes</a>
+</nav>
 
-  <p>
-    Human Anatomy and Physiology deals with the structural organization
-    of the human body and the functions of its various systems.
-    This subject forms the foundation for understanding health,
-    disease, and pharmaceutical sciences.
-  </p>
+<main class="container">
 
-  <h3>What You Will Learn</h3>
-  <ul>
-    <li>Basic anatomical terminology</li>
-    <li>Levels of structural organization</li>
-    <li>Cell structure and functions</li>
-    <li>Human tissues and their types</li>
-    <li>Major organ systems of the body</li>
-  </ul>
+  <!-- SUBJECT IDENTITY -->
+  <h1>Human Anatomy & Physiology – I</h1>
+  <p><strong>Course:</strong> B.Pharmacy – Semester I</p>
+  <p><strong>PCI Code:</strong> BP101T</p>
 
-  <h3>Major Body Systems</h3>
-  <ul>
-    <li>Skeletal System</li>
-    <li>Muscular System</li>
-    <li>Cardiovascular System</li>
-    <li>Respiratory System</li>
-    <li>Digestive System</li>
-    <li>Nervous System</li>
-    <li>Endocrine System</li>
-    <li>Urinary and Reproductive Systems</li>
-  </ul>
+  <hr>
 
-  <h3>Importance in Pharmacy</h3>
-  <p>
-    Understanding human anatomy and physiology is essential for
-    comprehending drug actions, disease mechanisms, and therapeutic
-    interventions in pharmaceutical practice.
-  </p>
+  <!-- SHORT INTRO (OVERVIEW ONLY) -->
+  <section>
+    <p>
+      This subject deals with the basic structure and normal functions of the
+      human body. It forms the foundation for understanding diseases and
+      pharmacological action of drugs. Select a unit below to start studying.
+    </p>
+  </section>
+
+  <hr>
+
+  <!-- UNITS LIST (CLICKABLE) -->
+  <section>
+    <h2>📘 Units – Click to Study</h2>
+
+    <ul class="unit-list">
+      <li>
+        <a href="anatomy-unit-1.html">
+          Unit I – Introduction to Human Body
+        </a>
+      </li>
+
+      <li>
+        <a href="anatomy-unit-2.html">
+          Unit II – Structural Organization & Tissues
+        </a>
+      </li>
+
+      <li>
+        <a href="anatomy-unit-3.html">
+          Unit III – Skeletal System
+        </a>
+      </li>
+
+      <li>
+        <a href="anatomy-unit-4.html">
+          Unit IV – Blood and Lymph
+        </a>
+      </li>
+
+      <li>
+        <a href="anatomy-unit-5.html">
+          Unit V – Cardiovascular System
+        </a>
+      </li>
+    </ul>
+  </section>
+
 </main>
-  
 
-<footer>
-  © 2025 Prasivo · Independent Learning Platform
-</footer>
+<!-- COMMON SCRIPT -->
 <script src="script.js"></script>
 </body>
 </html>
