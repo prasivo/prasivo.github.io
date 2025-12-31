@@ -86,10 +86,24 @@ function toggleMenu() {
   if (!menu) return;
 
   menu.classList.toggle("active");
-  document.body.style.overflow = menu.classList.contains("active")
-    ? "hidden"
-    : "auto";
+  document.body.style.overflow =
+    menu.classList.contains("active") ? "hidden" : "auto";
 }
+
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("sideMenu");
+  const icon = document.querySelector(".menu-icon");
+  if (!menu || !icon) return;
+
+  if (
+    menu.classList.contains("active") &&
+    !menu.contains(e.target) &&
+    !icon.contains(e.target)
+  ) {
+    menu.classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+});
 // Auto close menu on side click
 document.querySelectorAll("#sideMenu a").forEach(link => {
   link.addEventListener("click", () => {
@@ -110,3 +124,7 @@ document.addEventListener("click", (e) => {
     document.body.style.overflow = "auto";
   }
 });
+<script src="app.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
