@@ -1,0 +1,82 @@
+let currentPath = [];
+
+window.openSidebar = (e) => { e.stopPropagation(); document.getElementById('sidebar').classList.add('active'); };
+window.closeSidebar = () => document.getElementById('sidebar').classList.remove('active');
+
+window.showPage = (id) => {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    closeSidebar();
+};
+
+window.renderSyllabus = (course) => {
+    const list = document.getElementById('selection-list');
+    const title = document.getElementById('selection-title');
+    const back = document.getElementById('dynamic-back');
+    
+    list.innerHTML = "";
+    title.innerText = course.toUpperCase() + " Semesters";
+    
+    // B.Pharm logic
+    let sems = (course === 'bpharm') ? 8 : (course === 'dpharm' ? 4 : 0);
+    
+    for(let i=1; i<=sems; i++) {
+        list.innerHTML += `<div class="card" onclick="renderSubjects('${course}', 'sem${i}')"><h3>Semester ${i}</h3></div>`;
+    }
+    
+    back.onclick = () => showPage('home-page');
+    showPage('selection-page');
+};
+
+window.renderSubjects = (course, sem) => {
+    const list = document.getElementById('selection-list');
+    const title = document.getElementById('selection-title');
+    list.innerHTML = "";
+    title.innerText = "Select Subject";
+    
+    const subjects = prasivoData[course][sem];
+    for(let s in subjects) {
+        list.innerHTML += `<div class="card" onclick="renderUnits('${course}', '${sem}', '${s}')"><h3>${subjects[s].name}</h3></div>`;
+    }
+    document.getElementById('dynamic-back').onclick = () => renderSyllabus(course);
+};
+
+window.renderUnits = (course, sem, sub) => {
+    const list = document.getElementById('selection-list');
+    document.getElementById('selection-title').innerText = "Select Unit";
+    list.innerHTML = "";
+    
+    const units = prasivoData[course][sem][sub].units;
+    for(let u in units) {
+        list.innerHTML += `<div class="card" onclick="renderTopics('${course}', '${sem}', '${sub}', '${u}')"><h3>${units[u].name}</h3></div>`;
+    }
+    document.getElementById('dynamic-back').onclick = () => renderSubjects(course, sem);
+};
+
+window.renderTopics = (course, sem, sub, unit) => {
+    const list = document.getElementById('selection-list');
+    document.getElementById('selection-title').innerText = "Select Topic";
+    list.innerHTML = "";
+    
+    const topics = prasivoData[course][sem][sub].units[unit].topics;
+    for(let t in topics) {
+        list.innerHTML += `<div class="card" onclick="openTopic('${course}', '${sem}', '${sub}', '${unit}', '${t}')"><h3>${topics[t].title}</h3></div>`;
+    }
+    document.getElementById('dynamic-back').onclick = () => renderUnits(course, sem, sub);
+};
+
+let activeContent = null;
+window.openTopic = (course, sem, sub, unit, topic) => {
+    activeContent = prasivoData[course][sem][sub].units[unit].topics[topic];
+    document.getElementById('topic-title').innerText = activeContent.title;
+    document.getElementById('topic-body').innerHTML = activeContent.layers.pass;
+    
+    document.getElementById('study-back').onclick = () => renderTopics(course, sem, sub, unit);
+    showPage('study-page');
+};
+
+window.switchLayer = (layer) => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('topic-body').innerHTML = activeContent.layers[layer];
+};
