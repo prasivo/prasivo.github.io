@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRASIVO | Pharmacy Learning System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root { --primary: #6366f1; --accent: #22d3ee; --bg: #0b0f1a; --card: #161b22; --text: #f1f5f9; --red: #ef4444; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Plus Jakarta Sans',sans-serif; }
+        body { background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; }
+        
+        nav { position:fixed; top:0; width:100%; height:70px; background:rgba(11,15,26,0.9); backdrop-filter:blur(15px); display:flex; align-items:center; justify-content:space-between; padding:0 25px; z-index:2000; border-bottom:1px solid #1e293b; }
+        .logo { font-weight:800; font-size:1.6rem; cursor:pointer; color:var(--text); }
+        
+        #sidebar { position:fixed; top:0; left:-320px; width:300px; height:100%; background:#0f172a; z-index:3000; transition:0.3s; padding-top:80px; }
+        #sidebar.active { left:0; }
+        .sidebar-link { display:flex; padding:15px 25px; color:#94a3b8; text-decoration:none; font-weight:600; border-bottom:1px solid #1e293b; cursor:pointer; }
+        .sidebar-link:hover { color:var(--accent); background:rgba(255,255,255,0.05); }
+
+        .page { padding:90px 20px 40px; max-width:1000px; margin:0 auto; display:none; min-height:100vh; }
+        .page.active { display:block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+        .card { background:var(--card); border-radius:20px; padding:25px; border:1px solid #1e293b; margin-bottom:15px; cursor:pointer; transition:0.2s; }
+        .card:hover { border-color:var(--primary); transform:translateY(-3px); }
+        
+        .back-btn { display:inline-flex; align-items:center; color:var(--accent); cursor:pointer; font-weight:700; margin-bottom:20px; gap:8px; }
+        .tab-bar { display:flex; gap:10px; margin-bottom:20px; }
+        .tab { flex:1; padding:12px; background:var(--card); border-radius:10px; text-align:center; cursor:pointer; font-weight:700; border:1px solid #334155; }
+        .tab.active { background:var(--primary); color:white; }
+        
+        #topic-body img { max-width:100%; border-radius:15px; margin:20px 0; border:1px solid #334155; }
+    </style>
+</head>
+<body onclick="closeSidebar()">
+
+    <nav>
+        <div onclick="openSidebar(event)" style="font-size:1.5rem; color:var(--accent); cursor:pointer;"><i class="fas fa-bars"></i></div>
+        <div class="logo" onclick="showPage('home-page')">PRASIVO</div>
+        <div style="width:30px"></div>
+    </nav>
+
+    <div id="sidebar" onclick="event.stopPropagation()">
+        <div class="sidebar-link" onclick="showPage('home-page')">Home</div>
+        <div class="sidebar-link" onclick="renderSyllabus('bpharm')">B.Pharmacy</div>
+        <div class="sidebar-link" onclick="renderSyllabus('dpharm')">D.Pharmacy</div>
+        <div class="sidebar-link" onclick="renderSyllabus('gpat')">GPAT</div>
+        <div class="sidebar-link" onclick="renderSyllabus('cuet')">CUET-PG</div>
+        <div class="sidebar-link" style="color:var(--red)" onclick="renderSyllabus('exam')">EXAM MODE 🚨</div>
+        <div class="sidebar-link" onclick="showPage('contact-page')">Contact & About</div>
+    </div>
+
+    <div id="home-page" class="page active">
+        <div class="card" style="cursor:default">
+            <h1>Welcome to <span style="color:var(--accent)">PRASIVO</span></h1>
+            <p>Pharmacy education ko simplify karne ka mission. Yahan aapko PCI syllabus ke according layered study material milega.</p>
+        </div>
+        <div class="card" onclick="renderSyllabus('bpharm')"><h2>Start Learning B.Pharm →</h2></div>
+    </div>
+
+    <div id="selection-page" class="page">
+        <div id="dynamic-back" class="back-btn"><i class="fas fa-arrow-left"></i> Back</div>
+        <h2 id="selection-title" style="margin-bottom:20px">Select Option</h2>
+        <div id="selection-list"></div>
+    </div>
+
+    <div id="study-page" class="page">
+        <div id="study-back" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Topics</div>
+        <div class="tab-bar">
+            <div class="tab active" onclick="switchLayer('pass')">PASS</div>
+            <div class="tab" onclick="switchLayer('power')">POWER</div>
+            <div class="tab" onclick="switchLayer('elevation')">ELEVATION</div>
+        </div>
+        <div class="card" style="cursor:default">
+            <h1 id="topic-title">Topic</h1>
+            <div id="topic-body"></div>
+        </div>
+    </div>
+
+    <div id="contact-page" class="page">
+        <div class="back-btn" onclick="showPage('home-page')"><i class="fas fa-arrow-left"></i> Home</div>
+        <div class="card">
+            <h2>About Founder</h2>
+            <p><b>Prasoon Gupta</b> - Dedicated to making pharmacy easy for everyone.</p>
+            <p>Connect: itsprasoon2004@gmail.com</p>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
